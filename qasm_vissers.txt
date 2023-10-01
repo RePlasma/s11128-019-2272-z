@@ -1,0 +1,18 @@
+OPENQASM 2.0;
+include "qelib1.inc";
+// IBMqx4 Tenerife
+// Parameters: lambda = 0.4, kappa = 1, omega = 0, Omega = 12
+qreg q[5];
+creg b[5];
+// Rabi oscillation
+ry(1.92) q[2];
+// Interaction between atom and field
+rz(0.0) q[2];
+cx q[2], q[0];
+cx q[0], q[2]; ry(-0.4) q[2]; cx q[0], q[2]; ry(0.4) q[2];
+cx q[2], q[0];
+
+// Measure state of atom
+measure q[2] -> b[0];
+// Measure state of the field
+measure q[0] -> b[1];
